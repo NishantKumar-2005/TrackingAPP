@@ -1,0 +1,63 @@
+/* src/components/GroupActions.css */
+
+.group-actions {
+    background-color: #f9f9f9;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .group-actions h2 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .action-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .input-group {
+    flex: 1;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .input-group:focus {
+    border-color: #4a90e2;
+    outline: none;
+  }
+  
+  .btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .join-btn {
+    background-color: #28a745;
+  }
+  
+  .join-btn:hover {
+    background-color: #218838;
+  }
+  
+  .leave-btn {
+    background-color: #dc3545;
+  }
+  
+  .leave-btn:hover {
+    background-color: #c82333;
+  }
+  
+  .current-group {
+    color: #555;
+  }
+  

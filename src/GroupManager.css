@@ -1,0 +1,64 @@
+/* src/components/GroupManager.css */
+
+.group-manager {
+    background-color: #f9f9f9;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .group-manager h2 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .group-manager .form-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .group-manager .input-group {
+    flex: 1;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .group-manager .input-group:focus {
+    border-color: #4a90e2;
+    outline: none;
+  }
+  
+  .group-manager .btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    transition: background-color 0.3s;
+  }
+  
+  .group-manager .join-btn {
+    background-color: #28a745;
+  }
+  
+  .group-manager .join-btn:hover {
+    background-color: #218838;
+  }
+  
+  .group-manager .leave-btn {
+    background-color: #dc3545;
+  }
+  
+  .group-manager .leave-btn:hover {
+    background-color: #c82333;
+  }
+  
+  .group-manager .current-group {
+    margin-top: 10px;
+    color: #555;
+  }
+  

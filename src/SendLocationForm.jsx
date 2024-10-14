@@ -1,10 +1,10 @@
 // src/components/SendLocationForm.jsx
 
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import './SendLocationForm.css';
 import PropTypes from 'prop-types';
 
-const SendLocationForm = ({ sendLocation }) => {
+const SendLocationForm = ({ sendGroupLocation, currentGroup }) => {
   const [deviceId, setDeviceId] = useState('');
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
@@ -14,6 +14,11 @@ const SendLocationForm = ({ sendLocation }) => {
     e.preventDefault();
 
     // Basic validation
+    if (!currentGroup) {
+      alert('Please join a group before sending location.');
+      return;
+    }
+
     if (!deviceId || !latitude || !longitude) {
       alert('Please fill in all fields.');
       return;
@@ -27,8 +32,8 @@ const SendLocationForm = ({ sendLocation }) => {
       return;
     }
 
-    // Send location
-    sendLocation(deviceId, lat, lon);
+    // Send group location
+    sendGroupLocation(currentGroup, deviceId, lat, lon);
 
     // Reset form
     setDeviceId('');
@@ -40,7 +45,7 @@ const SendLocationForm = ({ sendLocation }) => {
 
   return (
     <div className="send-location-form">
-      <h2>Send Location</h2>
+      <h2>Send Location to Group</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="deviceId">Device ID:</label>
@@ -84,7 +89,8 @@ const SendLocationForm = ({ sendLocation }) => {
   );
 };
 SendLocationForm.propTypes = {
-  sendLocation: PropTypes.func.isRequired,
+  sendGroupLocation: PropTypes.func.isRequired,
+  currentGroup: PropTypes.string.isRequired,
 };
 
 export default SendLocationForm;

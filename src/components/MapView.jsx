@@ -1,13 +1,11 @@
 // src/components/MapView.jsx
-
-import React from 'react';
 import PropTypes from 'prop-types';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import './MapView.css';
+import useDeviceId from '../hooks/useDeviceId';
 
-// Fix default marker icon issues with webpack
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
@@ -21,31 +19,35 @@ L.Icon.Default.mergeOptions({
 
 // Custom icon for current user
 const currentUserIcon = new L.Icon({
-  iconUrl: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png', // Use a distinct color
+  iconUrl: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
   iconSize: [32, 32],
   iconAnchor: [16, 32],
   popupAnchor: [0, -32],
 });
 
-const MapView = ({ deviceLocations, currentDeviceId }) => {
-  // Set default center to a neutral location (e.g., geographical center)
-  const defaultPosition = [20, 0]; // Latitude, Longitude
+const MapView = ({ deviceLocations }) => {
+  const deviceId = useDeviceId();
+
+  // Set default center to the user's current location or a fallback
+  const userLocation = deviceLocations[deviceId]
+    ? [deviceLocations[deviceId].latitude, deviceLocations[deviceId].longitude]
+    : [20, 0]; // Default to equator if no location yet
 
   return (
-    <MapContainer center={defaultPosition} zoom={2} scrollWheelZoom={true} className="map-container">
+    <MapContainer center={userLocation} zoom={2} scrollWheelZoom={true} className="map-container">
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {Object.keys(deviceLocations).map((deviceId) => {
-        const { latitude, longitude, timestamp } = deviceLocations[deviceId];
-        const isCurrentDevice = deviceId === currentDeviceId;
+      {Object.keys(deviceLocations).map((id) => {
+        const { latitude, longitude, timestamp } = deviceLocations[id];
+        const isCurrentDevice = id === deviceId;
         const markerIcon = isCurrentDevice ? currentUserIcon : new L.Icon.Default();
 
         return (
-          <Marker key={deviceId} position={[latitude, longitude]} icon={markerIcon}>
+          <Marker key={id} position={[latitude, longitude]} icon={markerIcon}>
             <Popup>
-              <strong>Device ID:</strong> {deviceId} <br />
+              <strong>Device ID:</strong> {id === deviceId ? 'You' : id} <br />
               <strong>Last Updated:</strong> {new Date(timestamp).toLocaleString()}
             </Popup>
           </Marker>
@@ -56,7 +58,7 @@ const MapView = ({ deviceLocations, currentDeviceId }) => {
 };
 MapView.propTypes = {
   deviceLocations: PropTypes.object.isRequired,
-  currentDeviceId: PropTypes.string.isRequired,
 };
 
 export default MapView;
+

@@ -1,113 +1,44 @@
 /* src/App.css */
 
-/* Reset some default styles */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body, html, #root {
-  height: 100%;
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   font-family: Arial, sans-serif;
 }
 
-.app-container {
+.App-header {
+  background-color: #4a90e2;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  align-items: center;
 }
 
-.app-header {
-  background-color: #4a90e2;
-  color: white;
-  padding: 15px 20px;
-  text-align: center;
-}
-
-.app-header h1 {
-  margin-bottom: 5px;
-}
-
-.status {
-  font-weight: bold;
-}
-
-.status.connected {
-  color: #28a745; /* Green */
-}
-
-.status.reconnecting {
-  color: #ffc107; /* Yellow */
-}
-
-.status.disconnected {
-  color: #dc3545; /* Red */
-}
-
-.app-main {
+.map-and-list {
   display: flex;
-  flex: 1;
-  overflow: hidden;
-}
-
-.left-panel, .right-panel {
-  padding: 20px;
-  overflow-y: auto;
-}
-
-.left-panel {
-  flex: 2;
-}
-
-.right-panel {
-  flex: 1;
-  border-left: 1px solid #ddd;
-}
-
-.app-footer {
-  background-color: #f1f1f1;
-  text-align: center;
-  padding: 10px 20px;
-  font-size: 0.9em;
-  color: #555;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .app-main {
-    flex-direction: column;
-  }
-
-  .right-panel {
-    border-left: none;
-    border-top: 1px solid #ddd;
-  }
-}
-
-/* Device List Styling */
-.device-list {
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
   margin-top: 20px;
 }
 
-.device-list h2 {
-  margin-bottom: 10px;
-  color: #333;
+@media (max-width: 768px) {
+  .map-and-list {
+    flex-direction: column;
+  }
 }
 
-.device-list ul {
-  list-style-type: none;
-  padding-left: 0;
-}
-
-.device-list li {
-  background-color: #f9f9f9;
-  padding: 10px 15px;
-  margin-bottom: 8px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-.device-list strong {
-  color: #4a90e2;
+.App-footer {
+  background-color: #f1f1f1;
+  text-align: center;
+  padding: 10px;
+  color: #555;
 }
